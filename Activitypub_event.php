@@ -27,30 +27,35 @@
 defined('GNUSOCIAL') || die();
 
 /**
- * ActivityPub event representation
+ * ActivityPub happenings representation
  *
  * @category  Plugin
  * @package   GNUsocial
  * @author    Susanna Di Vita <susanna.divita.2@gmail.com>
  * @license   https://www.gnu.org/licenses/agpl.html GNU AGPL v3 or later
  */
-class Activitypub_event
+class Activitypub_happenings
 {
     /**
-     * Generates a pretty array from an Event object
+     * Generates a pretty array from an Happening object
      *
      * @author    Susanna Di Vita <susanna.divita.2@gmail.com>
-     * @param Event $event
+     * @param Happening $happening
      * @return array pretty array to be used in a response
      */
-    public static function event_to_array($event)
+    public static function happening_to_array($happening)
     {
         $res = [
             '@context' => 'https://www.w3.org/ns/activitystreams',
             'type'      => 'Event',
-            'name'      => $event->getTitle(),
+            'name'      => $happening->getTitle(),
+	        'startTime' => array('startdate',
+                            array('xmlns' => 'http://purl.org/rss/1.0/plugins/event/'),
+                            common_date_iso8601($this->start_time)),//$happening->start_time,
+            'endTime' => array('enddate',
+                            array('xmlns' => 'http://purl.org/rss/1.0/plugins/event/'),
+                            common_date_iso8601($this->end_time))//$happening->end_time
         ];
-
         return $res;
     }
 }
