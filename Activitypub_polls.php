@@ -47,11 +47,11 @@ class Activitypub_poll
     {
         $res = [
             '@context' => 'https://www.w3.org/ns/activitystreams',
-            'type'      => 'Question',
-            'id' => $poll->mimetype,
-            'name'      => $poll->getTitle(),
-            'content' => $poll->question,
-            'oneOf' => $poll->options
+            'type'     => 'Question',
+            'id'       => $poll->mimetype,
+            'name'     => $poll->getTitle(),
+            'content'  => $poll->question,
+            'oneOf'    => $poll->options
         ];
         return $res;
     }

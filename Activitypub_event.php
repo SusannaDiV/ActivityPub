@@ -46,15 +46,11 @@ class Activitypub_happenings
     public static function happening_to_array($happening)
     {
         $res = [
-            '@context' => 'https://www.w3.org/ns/activitystreams',
+            '@context'  => 'https://www.w3.org/ns/activitystreams',
             'type'      => 'Event',
             'name'      => $happening->getTitle(),
-	        'startTime' => array('startdate',
-                            array('xmlns' => 'http://purl.org/rss/1.0/plugins/event/'),
-                            common_date_iso8601($this->start_time)),//$happening->start_time,
-            'endTime' => array('enddate',
-                            array('xmlns' => 'http://purl.org/rss/1.0/plugins/event/'),
-                            common_date_iso8601($this->end_time))//$happening->end_time
+	    'startTime' => $happening->start_time,
+            'endTime'   => $happening->end_time
         ];
         return $res;
     }
